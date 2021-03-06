@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<link rel="stylesheet" type="text/css" href="css/index.css">
+<body onload="run();">
+
+</body>
+<script src="js/index.js"></script>
+<script src="js/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+var payload = "";
+function run()
+{   var counter=0;
+	$.ajax({
+		url:'https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&page=2',
+		data:{"api_key":"5MlVVP1hf6xrPrZOoF1h6S8i2X6qVfxCLqCHvTzx"},
+		success:function(result){
+            console.log(result)
+            payload = result;
+            counter=payload.photos.length;
+            var img=[];
+
+            for(var i=0;i<counter;i++) 
+            {  
+            	
+            	img[i]=document.createElement("img");
+            	img[i].src=payload.photos[i].img_src;
+            	img[i].setAttribute("width","100px");
+            	img[i].setAttribute("height","100px");
+
+                document.getElementsByTagName('body')[0].appendChild(img[i]);          
+            }
+          
+	
+
+		}
+	});
+
+}
+
+</script>
+
+</html>
